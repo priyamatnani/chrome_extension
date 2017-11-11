@@ -5,6 +5,7 @@
 
 </div>
 <div [hidden] = "searchObj.showResults == false">
-  <div [innerHTML]="searchObj.searchResults">
+  <div *ngFor="#title of searchObj.titles">
+      {{title}}
   </div>
 </div>

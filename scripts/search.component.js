@@ -28,26 +28,23 @@ System.register(['angular2/core', "./api.service"], function(exports_1, context_
                     this.searchObj = {
                         searchString: "",
                         searchResults: "",
+                        titles: [],
                         showResults: false
                     };
                 }
                 ;
                 // functions
                 SearchComponent.prototype.modifyResults = function () {
-                    console.log(" called from heeeee", this.searchObj.searchResults);
                     if (this.searchObj.searchResults !== "") {
                         this.searchObj.showResults = true;
-                        var el = document.createElement('html');
-                        el.innerHTML = this.searchObj.searchResults;
-                        console.log(el.getElementsByTagName('a'));
                         var div = document.createElement("div");
                         div.innerHTML = this.searchObj.searchResults;
-                        var nodes = div.getElementsByTagName("a");
-                        var array = [];
+                        var nodes = div.getElementsByTagName("h3");
                         for (var i = 0; i < nodes.length; i++) {
-                            array.push(nodes[i].innerHTML);
+                            if (nodes[i].lastElementChild !== null) {
+                                searchObj.titles.push(nodes[i].lastElementChild.text);
+                            }
                         }
-                        console.log(">>>", array);
                     }
                 };
                 SearchComponent.prototype.onSearchClick = function () {

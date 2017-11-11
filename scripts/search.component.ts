@@ -3,7 +3,8 @@ import { ApiService } from "./api.service";
 
 interface Search {
   searchString : string,
-  searchResults : string
+  searchResults : string,
+  titles: [],
   showResults : boolean
 
 }
@@ -21,6 +22,7 @@ export class SearchComponent{
   searchObj : Search = {
       searchString : "",
       searchResults : "",
+      titles : [],
       showResults : false
     };
 
@@ -32,27 +34,22 @@ export class SearchComponent{
   // functions
 
   modifyResults(){
-    console.log(" called from heeeee",this.searchObj.searchResults)
     if(this.searchObj.searchResults !== ""){
       this.searchObj.showResults = true;
-
-
-      const el = document.createElement( 'html' );
-      el.innerHTML = this.searchObj.searchResults;
-
-      console.log(el.getElementsByTagName( 'a' ))
 
 
 
       const div = document.createElement("div");
       div.innerHTML = this.searchObj.searchResults;
-      var nodes = div.getElementsByTagName("a");
-      var array = [];
+      const nodes = div.getElementsByTagName("h3");
       for(var i=0; i<nodes.length; i++) {
-        array.push(nodes[i].innerHTML);
+        if(nodes[i].lastElementChild !== null){
+          searchObj.titles.push(nodes[i].lastElementChild.text);
+
+        }
+
       }
 
-      console.log(">>>",array)
 
     }
   }
