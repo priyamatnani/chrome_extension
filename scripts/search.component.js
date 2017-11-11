@@ -20,18 +20,25 @@ System.register(['angular2/core'], function(exports_1, context_1) {
         execute: function() {
             SearchComponent = (function () {
                 function SearchComponent() {
+                    this.search = {
+                        searchString: ""
+                    };
                 }
+                // initialize variables
+                // functions
+                SearchComponent.prototype.onSearchClick = function (search) {
+                    console.log("search string", search);
+                };
                 SearchComponent = __decorate([
                     core_1.Component({
                         selector: 'sp-search',
-                        template: '<h1> hello </h1>',
+                        templateUrl: './templates/search.html',
                     }), 
                     __metadata('design:paramtypes', [])
                 ], SearchComponent);
                 return SearchComponent;
             }());
             exports_1("SearchComponent", SearchComponent);
-            ;
         }
     }
 });

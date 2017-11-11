@@ -1,9 +1,27 @@
 import { Component } from 'angular2/core' ;
 
+interface Search {
+  searchString : string
+}
+
 @Component({
   selector : 'sp-search',
-  template : '<h1> hello </h1>',
+  templateUrl : './templates/search.html',
 })
 
-export class SearchComponent;
+export class SearchComponent{
+
+  search : Search = {
+    searchString : ""
+  }
+
+  // initialize variables
+
+
+  // functions
+
+  onSearchClick(search : Search){
+    console.log("search string", search)
+  }
+}
 
