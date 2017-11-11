@@ -32,9 +32,28 @@ export class SearchComponent{
   // functions
 
   modifyResults(){
-    console.log(" called from heeeee")
+    console.log(" called from heeeee",this.searchObj.searchResults)
     if(this.searchObj.searchResults !== ""){
       this.searchObj.showResults = true;
+
+
+      const el = document.createElement( 'html' );
+      el.innerHTML = this.searchObj.searchResults;
+
+      console.log(el.getElementsByTagName( 'a' ))
+
+
+
+      const div = document.createElement("div");
+      div.innerHTML = this.searchObj.searchResults;
+      var nodes = div.getElementsByTagName("a");
+      var array = [];
+      for(var i=0; i<nodes.length; i++) {
+        array.push(nodes[i].innerHTML);
+      }
+
+      console.log(">>>",array)
+
     }
   }
 
