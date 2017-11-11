@@ -23,19 +23,26 @@ System.register(['angular2/core', "./api.service"], function(exports_1, context_
         execute: function() {
             SearchComponent = (function () {
                 // initialize variables
-                // functions
                 function SearchComponent(httpService) {
                     this.httpService = httpService;
-                    this.search = {
+                    this.searchObj = {
                         searchString: "",
-                        results: ""
+                        searchResults: "",
+                        showResults: false
                     };
                 }
-                SearchComponent.prototype.onSearchClick = function (search) {
+                ;
+                // functions
+                SearchComponent.prototype.modifyResults = function () {
+                    console.log(" called from heeeee");
+                    if (this.searchObj.searchResults !== "") {
+                        this.searchObj.showResults = true;
+                    }
+                };
+                SearchComponent.prototype.onSearchClick = function () {
                     var _this = this;
-                    console.log("search string", search);
-                    this.httpService.getSearchResults()
-                        .subscribe(function (data) { return _this.search.results = data; }, function (error) { return alert(error); }, function () { return console.log("data >>", _this.search.results); });
+                    this.httpService.getSearchResults(this.searchObj.searchString)
+                        .subscribe(function (data) { return _this.searchObj.searchResults = data; }, function (error) { return alert(error); }, function () { return _this.modifyResults(); });
                 };
                 SearchComponent = __decorate([
                     core_1.Component({

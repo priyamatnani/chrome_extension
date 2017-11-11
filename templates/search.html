@@ -1,4 +1,10 @@
-<div>
-  <input [(ngModel)] = "search.searchString" placeholder="Enter text here . . ."/>
-  <button (click) = onSearchClick(search)> Submit </button>
+
+<div [hidden] = "searchObj.showResults == true">
+  <input [(ngModel)] = "searchObj.searchString" placeholder="Enter text here . . ."/>
+  <button (click) = onSearchClick()> Submit </button>
+
+</div>
+<div [hidden] = "searchObj.showResults == false">
+  <div [innerHTML]="searchObj.searchResults">
+  </div>
 </div>

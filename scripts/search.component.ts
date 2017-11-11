@@ -3,7 +3,9 @@ import { ApiService } from "./api.service";
 
 interface Search {
   searchString : string,
-  results : string
+  searchResults : string
+  showResults : boolean
+
 }
 
 @Component({
@@ -14,26 +16,37 @@ interface Search {
 
 export class SearchComponent{
 
-  search : Search = {
-    searchString : "",
-    results : ""
-  };
+
+
+  searchObj : Search = {
+      searchString : "",
+      searchResults : "",
+      showResults : false
+    };
+
 
   // initialize variables
+  constructor( private httpService : ApiService) {};
 
 
   // functions
 
-  constructor( private httpService : ApiService) {}
+  modifyResults(){
+    console.log(" called from heeeee")
+    if(this.searchObj.searchResults !== ""){
+      this.searchObj.showResults = true;
+    }
+  }
 
-  onSearchClick(search : Search){
-    console.log("search string", search)
-    this.httpService.getSearchResults()
+  onSearchClick(){
+    this.httpService.getSearchResults(this.searchObj.searchString)
       .subscribe(
-        data => this.search.results = data,
+        data => this.searchObj.searchResults = data,
          error => alert(error),
-        () => console.log("data >>", this.search.results)
+        () => this.modifyResults()
       );
   }
+
+
 }
 

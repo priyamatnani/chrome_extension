@@ -22,13 +22,13 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
             },
             function (_1) {}],
         execute: function() {
-            API_URL = "https://www.google.com";
+            API_URL = "https://www.google.com/";
             ApiService = (function () {
                 function ApiService(http) {
                     this.http = http;
                 }
-                ApiService.prototype.getSearchResults = function () {
-                    return this.http.get(API_URL)
+                ApiService.prototype.getSearchResults = function (searchString) {
+                    return this.http.get(API_URL + 'search?q=' + searchString)
                         .map(function (res) { return res.text(); });
                 };
                 ApiService = __decorate([
