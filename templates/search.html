@@ -1,32 +1,28 @@
-
 <div class="container">
   <form (keydown)="keyDownFunction($event)">
 
-      <div class="field" id="searchform">
-        <input type="text" id="searchterm" placeholder="what are you searching for?" [(ngModel)] = "searchString" />
-        <button type="button" id="search" (click) = onSearchClick()>Find!</button>
-      </div>
+    <div class="field" id="searchform">
+      <input type="text" id="searchterm" placeholder="what are you searching for?" [(ngModel)]="searchString"/>
+      <button type="button" id="search" (click)=onSearchClick()>Find!</button>
+    </div>
 
   </form>
 
-  <div id="loader"></div>
 
+  <div [hidden]="showResults == false">
 
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th>Top Results</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="#title of titles">
+          <td><a href="{{title.href}}" target="_blank"> {{ title.label }} </a></td>
+        </tr>
 
-
-  <div [hidden] = "showResults == false" style="display:none;" id="myDiv" class="animate-bottom">
-  <table class="table table-hover">
-    <thead>
-    <tr>
-      <th>Top Results</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr  *ngFor=" #title of titles">
-      <td><a href="{{title.href}}" target="_blank"> {{ title.label }}  </a></td>
-    </tr>
-
-    </tbody>
-  </table>
-</div>
+        </tbody>
+      </table>
+    </div>
 </div>
