@@ -61,6 +61,12 @@ System.register(['angular2/core', "./api.service"], function(exports_1, context_
                     this.httpService.getSearchResults(this.searchString)
                         .subscribe(function (data) { return _this.searchResults = data; }, function (error) { return alert(error); }, function () { return _this.modifyResults(); });
                 };
+                SearchComponent.prototype.keyDownFunction = function (event) {
+                    if (event.keyCode == 13) {
+                        // rest of your code
+                        this.onSearchClick();
+                    }
+                };
                 SearchComponent = __decorate([
                     core_1.Component({
                         selector: 'sp-search',

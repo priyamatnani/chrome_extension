@@ -62,6 +62,13 @@ export class SearchComponent{
       );
   }
 
+  keyDownFunction(event) {
+    if(event.keyCode == 13) {
+      // rest of your code
+      this.onSearchClick();
+    }
+  }
+
 
 }
 

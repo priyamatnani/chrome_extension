@@ -1,13 +1,20 @@
 
 <div class="container">
-<div class="field" id="searchform">
-  <input type="text" id="searchterm" placeholder="what are you searching for?" [(ngModel)] = "searchString" />
-  <button type="button" id="search" (click) = onSearchClick()>Find!</button>
-</div>
+  <form (keydown)="keyDownFunction($event)">
+
+      <div class="field" id="searchform">
+        <input type="text" id="searchterm" placeholder="what are you searching for?" [(ngModel)] = "searchString" />
+        <button type="button" id="search" (click) = onSearchClick()>Find!</button>
+      </div>
+
+  </form>
+
+  <div id="loader"></div>
 
 
 
-<div [hidden] = "showResults == false">
+
+  <div [hidden] = "showResults == false" style="display:none;" id="myDiv" class="animate-bottom">
   <table class="table table-hover">
     <thead>
     <tr>
@@ -21,4 +28,5 @@
 
     </tbody>
   </table>
+</div>
 </div>
