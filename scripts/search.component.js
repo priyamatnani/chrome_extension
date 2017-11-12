@@ -21,41 +21,51 @@ System.register(['angular2/core', "./api.service"], function(exports_1, context_
                 api_service_1 = api_service_1_1;
             }],
         execute: function() {
+            // interface Search {
+            //   searchString : string,
+            //   searchResults : string,
+            //   showResults : boolean,
+            //   titles : []
+            //
+            // }
             SearchComponent = (function () {
                 // initialize variables
                 function SearchComponent(httpService) {
                     this.httpService = httpService;
-                    this.searchObj = {
-                        searchString: "",
-                        searchResults: "",
-                        titles: [],
-                        showResults: false
-                    };
+                    this.searchString = "";
+                    this.searchResults = "";
+                    this.showResults = false;
+                    this.titles = [];
                 }
                 ;
                 // functions
                 SearchComponent.prototype.modifyResults = function () {
-                    if (this.searchObj.searchResults !== "") {
-                        this.searchObj.showResults = true;
+                    if (this.searchResults !== "") {
+                        this.showResults = true;
                         var div = document.createElement("div");
-                        div.innerHTML = this.searchObj.searchResults;
+                        div.innerHTML = this.searchResults;
                         var nodes = div.getElementsByTagName("h3");
                         for (var i = 0; i < nodes.length; i++) {
                             if (nodes[i].lastElementChild !== null) {
-                                searchObj.titles.push(nodes[i].lastElementChild.text);
+                                this.titles.push({
+                                    "label": nodes[i].lastElementChild.text,
+                                    "href": nodes[i].lastElementChild.href
+                                });
                             }
                         }
+                        console.log("this.titles", this.titles);
                     }
                 };
                 SearchComponent.prototype.onSearchClick = function () {
                     var _this = this;
-                    this.httpService.getSearchResults(this.searchObj.searchString)
-                        .subscribe(function (data) { return _this.searchObj.searchResults = data; }, function (error) { return alert(error); }, function () { return _this.modifyResults(); });
+                    this.httpService.getSearchResults(this.searchString)
+                        .subscribe(function (data) { return _this.searchResults = data; }, function (error) { return alert(error); }, function () { return _this.modifyResults(); });
                 };
                 SearchComponent = __decorate([
                     core_1.Component({
                         selector: 'sp-search',
                         templateUrl: './templates/search.html',
+                        styleUrls: ['../style.css'],
                         providers: [api_service_1.ApiService]
                     }), 
                     __metadata('design:paramtypes', [api_service_1.ApiService])
