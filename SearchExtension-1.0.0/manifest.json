@@ -29,6 +29,7 @@
     },
 //    "content_security_policy": "script-src 'self' http://* 'unsafe-eval'; object-src 'self' http://*",
     "content_security_policy": "default-src gap://ready file://* *;connect-src	'self' http://* https://* 'unsafe-inline' ;style-src 'self' http://* https://* 'unsafe-inline'; script-src 'self' http://* https://* 'unsafe-inline' 'unsafe-eval'",
-    "permissions": ["activeTab"]
+    "permissions": ["activeTab","http://www.google.com/","https://www.google.com/"]
+
 }
 
