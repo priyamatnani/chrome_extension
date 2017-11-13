@@ -12,7 +12,7 @@ import { ApiService } from "./api.service";
 @Component({
   selector : 'sp-search',
   templateUrl : './templates/search.html',
-  styleUrls : ['../style.css'],
+  styleUrls : ['../css/style.css'],
   providers : [ApiService]
 })
 

@@ -1,0 +1,30 @@
+<div class="container">
+  <form (keydown)="keyDownFunction($event)">
+
+    <div class="field" id="searchform">
+      <input type="text" id="searchterm" placeholder="Enter text here . . ." [(ngModel)]="searchString"/>
+      <button type="button" id="search" (click)=onSearchClick()>Submit</button>
+    </div>
+
+  </form>
+
+  <div [hidden] = "showLoader == false" class="loader">
+
+  </div>
+  <div [hidden]="showResults == false" >
+
+      <table class="table table-hover">
+        <thead [hidden] = "showLoader == true" >
+        <tr>
+          <th>Top Results</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="#title of titles">
+          <td><a href="{{title.href}}" target="_blank"> {{ title.label }} </a></td>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
+</div>
