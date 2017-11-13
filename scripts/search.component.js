@@ -36,17 +36,19 @@ System.register(['angular2/core', "./api.service"], function(exports_1, context_
                     this.searchResults = "";
                     this.showResults = false;
                     this.titles = [];
+                    this.showLoader = false;
                 }
                 ;
                 // functions
                 SearchComponent.prototype.modifyResults = function () {
+                    this.showLoader = false;
                     if (this.searchResults !== "") {
                         this.showResults = true;
                         var div = document.createElement("div");
                         div.innerHTML = this.searchResults;
                         var nodes = div.getElementsByTagName("h3");
                         for (var i = 0; i < nodes.length; i++) {
-                            if (nodes[i].lastElementChild !== null) {
+                            if (nodes[i].lastElementChild !== null && nodes[i].lastElementChild.text !== undefined) {
                                 this.titles.push({
                                     "label": nodes[i].lastElementChild.text,
                                     "href": nodes[i].lastElementChild.href
@@ -58,6 +60,8 @@ System.register(['angular2/core', "./api.service"], function(exports_1, context_
                 };
                 SearchComponent.prototype.onSearchClick = function () {
                     var _this = this;
+                    this.showLoader = true;
+                    this.titles = [];
                     this.httpService.getSearchResults(this.searchString)
                         .subscribe(function (data) { return _this.searchResults = data; }, function (error) { return alert(error); }, function () { return _this.modifyResults(); });
                 };

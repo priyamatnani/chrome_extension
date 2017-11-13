@@ -2,17 +2,19 @@
   <form (keydown)="keyDownFunction($event)">
 
     <div class="field" id="searchform">
-      <input type="text" id="searchterm" placeholder="what are you searching for?" [(ngModel)]="searchString"/>
-      <button type="button" id="search" (click)=onSearchClick()>Find!</button>
+      <input type="text" id="searchterm" placeholder="Enter text here . . ." [(ngModel)]="searchString"/>
+      <button type="button" id="search" (click)=onSearchClick()>Submit</button>
     </div>
 
   </form>
 
+  <div [hidden] = "showLoader == false" class="loader">
 
-  <div [hidden]="showResults == false">
+  </div>
+  <div [hidden]="showResults == false" >
 
       <table class="table table-hover">
-        <thead>
+        <thead [hidden] = "showLoader == true" >
         <tr>
           <th>Top Results</th>
         </tr>

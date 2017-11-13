@@ -22,6 +22,7 @@ export class SearchComponent{
   searchResults = "";
   showResults = false;
   titles = [];
+  showLoader = false;
 
 
   // initialize variables
@@ -33,14 +34,17 @@ export class SearchComponent{
   // functions
 
   modifyResults(){
+    this.showLoader = false;
+
     if(this.searchResults !== ""){
       this.showResults = true;
+
 
       const div = document.createElement("div");
       div.innerHTML = this.searchResults;
       const nodes = div.getElementsByTagName("h3");
       for(var i=0; i<nodes.length; i++) {
-        if(nodes[i].lastElementChild !== null){
+        if(nodes[i].lastElementChild !== null && nodes[i].lastElementChild.text !== undefined){
           this.titles.push({
             "label" : nodes[i].lastElementChild.text,
             "href" : nodes[i].lastElementChild.href
@@ -54,6 +58,8 @@ export class SearchComponent{
   }
 
   onSearchClick(){
+    this.showLoader = true;
+    this.titles =[];
     this.httpService.getSearchResults(this.searchString)
       .subscribe(
         data => this.searchResults = data,
